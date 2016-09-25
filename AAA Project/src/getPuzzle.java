@@ -37,9 +37,9 @@ public class getPuzzle {
 		FileReader reader = new FileReader(path);
 		BufferedReader txtReader = new BufferedReader(reader);
 		
-		String[] textData = new String[500];
+		String[] textData = new String[510];
 		
-		for(int i=0; i<500;i++)
+		for(int i=0; i<510;i++)
 		{
 			textData[i] = txtReader.readLine();
 			

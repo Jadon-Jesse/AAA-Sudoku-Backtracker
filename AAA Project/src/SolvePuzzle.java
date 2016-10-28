@@ -8,8 +8,6 @@ public class SolvePuzzle {
 	public static int COL;
 	public static int[][] grid;
 
-
-
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		int puzzleNum = 0;
@@ -20,7 +18,6 @@ public class SolvePuzzle {
 		System.out.println("Choose puzzle between 1 & 51 ");
 		puzzleNum = sc.nextInt();
 		
-		
 		while(puzzleNum<1 || puzzleNum >51){
 			System.out.println("Out of bounds");
 			System.out.println("Choose puzzle between 1 & 51 ");
@@ -30,6 +27,15 @@ public class SolvePuzzle {
 		getPuzzle obj = new getPuzzle();
 		String[][] boardTmp=obj.getGrid(path, puzzleNum);
 		grid = obj.toInt(boardTmp);
+		
+		double numZeros = obj.numZeros(grid);
+		double numNums = 81 - numZeros;
+		double percent = (numNums/81)*100;
+		
+		System.out.println("Number zeros : "+numZeros);
+
+		System.out.println("Partiall solved percentage: "+percent);
+		
 		
 		print(grid);
 		
@@ -43,6 +49,8 @@ public class SolvePuzzle {
 		boolean answer = solve(); 
 		long end = System.nanoTime();
 		
+		
+		
 		long t= end-start;
 		double time = t/1000000000.0; //convert ns to sec.
 		
@@ -50,8 +58,11 @@ public class SolvePuzzle {
 			print(grid);
 			System.out.println("Time taken :"+time);
 		}
-	    else
+	    else{
 	         System.out.printf("No solution exists");		
+	    }
+		
+		
 		
 
 	}

@@ -72,4 +72,19 @@ public class getPuzzle {
 		return Char;
 		
 	}
+	
+	public double numZeros(int grid[][]){
+		double num=0.0;
+		
+		for(int i=0;i<9;i++){
+			for(int j=0;j<9;j++){
+				if(grid[i][j]==0){
+					num++;
+				}
+			}
+		}
+		
+		return num;
+		
+	}
 }

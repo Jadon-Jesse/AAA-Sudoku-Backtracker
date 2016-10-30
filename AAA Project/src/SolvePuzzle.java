@@ -65,8 +65,8 @@ public class SolvePuzzle {
 		
 		if(answer){
 			print(grid);
-			System.out.println("Time taken :"+time);
-			System.out.println("Num backtracks :"+count);
+			System.out.println("Time taken :"+time + " (sec)");
+			System.out.println("Number of backtracks :"+count);
 		}
 	    else{
 	         System.out.printf("No solution exists");		

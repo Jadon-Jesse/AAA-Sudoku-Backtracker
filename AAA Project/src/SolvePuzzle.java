@@ -40,9 +40,10 @@ public class SolvePuzzle {
 		double numNums = 81 - numZeros;
 		double percent = (numNums/81)*100;
 		
-		System.out.println("Number zeros : "+numZeros);
+		System.out.println("Empty cells : "+numZeros);
+		System.out.println("Clues : "+numNums);
 
-		System.out.println("Partially solved percentage: "+percent);
+		System.out.println("Percentage partially solved: "+percent);
 		
 		
 		print(grid);

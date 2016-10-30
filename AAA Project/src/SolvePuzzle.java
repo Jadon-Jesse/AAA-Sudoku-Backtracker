@@ -7,22 +7,30 @@ public class SolvePuzzle {
 	public static int ROW;
 	public static int COL;
 	public static int[][] grid;
+	public static int count=0;
+	public static String path = "C:/Users/Jadon/WorkSpace3Y/AAA-Sudoku-Backtracker/AAA Project/src/sudoku.txt";
 
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		int puzzleNum = 0;
-		String path = "C:/Users/Jadon/WorkSpace3Y/AAA-Sudoku-Backtracker/AAA Project/src/sudoku.txt";
+		
 		
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("Choose puzzle between 1 & 51 ");
+		System.out.println("Choose puzzle between 1 & 54 ");
 		puzzleNum = sc.nextInt();
 		
-		while(puzzleNum<1 || puzzleNum >51){
+		if(puzzleNum ==0){
+			TestData();
+		}
+		else{
+		
+		while(puzzleNum<1 || puzzleNum >54){
 			System.out.println("Out of bounds");
-			System.out.println("Choose puzzle between 1 & 51 ");
+			System.out.println("Choose puzzle between 1 & 54 ");
 			puzzleNum = sc.nextInt();
 		}
+		
 		
 		getPuzzle obj = new getPuzzle();
 		String[][] boardTmp=obj.getGrid(path, puzzleNum);
@@ -34,7 +42,7 @@ public class SolvePuzzle {
 		
 		System.out.println("Number zeros : "+numZeros);
 
-		System.out.println("Partiall solved percentage: "+percent);
+		System.out.println("Partially solved percentage: "+percent);
 		
 		
 		print(grid);
@@ -57,10 +65,13 @@ public class SolvePuzzle {
 		if(answer){
 			print(grid);
 			System.out.println("Time taken :"+time);
+			System.out.println("Num backtracks :"+count);
 		}
 	    else{
 	         System.out.printf("No solution exists");		
 	    }
+		
+		}
 		
 		
 		
@@ -84,7 +95,7 @@ public class SolvePuzzle {
 				//Can we make a legal insert?
 				if (isSafe(row,col,i))
 				{
-					//If yes, Assugn the value to the cell
+					//If yes, Assign the value to the cell
 					grid[row][col]=i;
 					
 					//Re call solve, and if there is no unassigned cell
@@ -94,6 +105,7 @@ public class SolvePuzzle {
 					}
 					//otherwise, we messed up. Delete and try again
 					grid[row][col]=0;
+					count++;
 				}
 			}
 		}
@@ -172,6 +184,47 @@ public class SolvePuzzle {
 				System.out.print(grid[i][k]+" ");
 			}
 			System.out.println();
+		}
+	}
+	
+	
+	public static void TestData() throws IOException{
+		
+		for(int i=54;i<=64;i++){
+			count =0;
+			
+			getPuzzle obj = new getPuzzle();
+			String[][] boardTmp=obj.getGrid(path, i);
+			grid = obj.toInt(boardTmp);
+			
+			double numZeros = obj.numZeros(grid);
+			double numClues = 81 - numZeros;
+			double percent = (numClues/81)*100;
+			
+			System.out.println("Grid "+i);
+			System.out.println("Number zeros : "+numZeros);
+			System.out.println("Number Clues : "+numClues);
+			System.out.println("Partially solved percentage: "+percent);
+			
+			long start = System.nanoTime();
+			boolean answer = solve(); 
+			long end = System.nanoTime();
+			
+			long t= end-start;
+			double time = t/1000000000.0;
+			
+			if(answer){
+				print(grid);
+				System.out.println("Time taken :"+ (time) );
+				System.out.println("Num backtracks :"+count);
+			}
+		    else{
+		         System.out.printf("No solution exists");		
+		    }
+			
+			System.out.println();
+			
+			
 		}
 	}
 
